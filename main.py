@@ -32,7 +32,8 @@ class Parser:
 
     def get_emails_list(self):
         self.email.select(config.EMAIL_DIR)
-        res, lst = self.email.search(None, f'(FROM "{config.AS_EMAIL}")')
+        from_email = f'(FROM "{config.AS_EMAIL}")'
+        res, lst = self.email.search(None, '(UNSEEN)', from_email)
         if res != 'OK':
             raise errors.GetEmailListError
         if not lst:
