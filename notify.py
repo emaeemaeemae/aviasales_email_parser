@@ -2,6 +2,10 @@ import os
 import urllib3
 import config
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 class Notifier:
     def __init__(self):
@@ -12,7 +16,7 @@ class Notifier:
             return
         http = urllib3.PoolManager()
         api = config.TELEGRAM_BOT_API
-        chat = config.CHAT_ID
+        chat = os.getenv('CHAT_ID')
         text = self.create_message(lst)
         http.request('get',
                      f'{api}{self.bot_token}/'

@@ -4,3 +4,4 @@ EMAIL_DIR = 'inbox'
 AS_EMAIL = 'subscribe@aviasales.ru'
 TABLE_FILE = 'table.json'
 TELEGRAM_BOT_API = 'https://api.telegram.org/bot'
+MINUTES = 1
