@@ -26,5 +26,5 @@ class Notifier:
     def create_message(lst):
         text = 'Следующие предложения соответствуют критериям:\n'
         for city, price in lst:
-            text += f'полет в {city} за {price} рублей'
+            text += f'полет в {city} за {price} рублей\n'
         return text
