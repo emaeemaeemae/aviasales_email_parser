@@ -8,6 +8,8 @@ class Notifier:
         self.bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
 
     def send_notify(self, lst):
+        if not lst:
+            return
         http = urllib3.PoolManager()
         api = config.TELEGRAM_BOT_API
         chat = config.CHAT_ID
