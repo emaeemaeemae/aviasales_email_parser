@@ -1,22 +1,26 @@
-class GetEmailListError(Exception):
+class BaseError(Exception):
     pass
 
 
-class EmailListDecodeError(Exception):
+class GetEmailListError(BaseError):
     pass
 
 
-class GetEmailHeaderError(Exception):
+class EmailListDecodeError(BaseError):
     pass
 
 
-class EmailMessageDecodeError(Exception):
+class GetEmailHeaderError(BaseError):
     pass
 
 
-class GetCityError(Exception):
+class EmailMessageDecodeError(BaseError):
     pass
 
 
-class GetPriceError(Exception):
+class GetCityError(BaseError):
+    pass
+
+
+class GetPriceError(BaseError):
     pass

@@ -4,6 +4,7 @@ import config
 
 from parser import Parser  # noqa
 from notify import Notifier
+from errors import BaseError
 
 
 def job():
@@ -17,5 +18,8 @@ if __name__ == '__main__':
     schedule.every(config.MINUTES).minutes.do(job)
 
     while True:
-        schedule.run_pending()
+        try:
+            schedule.run_pending()
+        except BaseError:
+            pass
         time.sleep(1)
