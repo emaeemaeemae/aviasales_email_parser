@@ -26,11 +26,11 @@ class Parser:
         return mail
 
     @staticmethod
-    def get_max_prices():
+    def get_max_prices() -> dict:
         with open(config.TABLE_FILE) as file:
             return json.load(file)
 
-    def get_emails_list(self):
+    def get_emails_list(self) -> list[str]:
         self.email.select(config.EMAIL_DIR)
         from_email = f'(FROM "{config.AS_EMAIL}")'
         res, lst = self.email.search(None, '(UNSEEN)', from_email)
@@ -46,7 +46,7 @@ class Parser:
 
         return lst
 
-    def get_email_header(self, msg_id):
+    def get_email_header(self, msg_id: str) -> str:
         res, msg = self.email.fetch(msg_id, '(RFC822)')
         if res != 'OK':
             raise errors.GetEmailHeaderError
@@ -58,25 +58,25 @@ class Parser:
         except:
             raise errors.EmailMessageDecodeError
 
-    def get_emails_headers(self):
+    def get_emails_headers(self) -> list[str]:
         return [self.get_email_header(msg) for msg in self.get_emails_list()]
 
     @staticmethod
-    def get_city_from_header(msg):
+    def get_city_from_header(msg: str) -> str:
         try:
             return re.search(r' - ([а-яА-ЯёЁ]+): ', msg).group(1)
         except:
             raise errors.GetCityError
 
     @staticmethod
-    def get_price_from_header(msg):
+    def get_price_from_header(msg: str) -> int:
         try:
             price = re.search(r': ([0-9 ]+)', msg).group(1).replace(' ', '')
             return int(price)
         except:
             raise errors.GetPriceError
 
-    def get_nice_routes(self):
+    def get_nice_routes(self) -> list:
         result = []
         for header in self.get_emails_headers():
             city = self.get_city_from_header(header)
