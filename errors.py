@@ -24,3 +24,7 @@ class GetCityError(BaseError):
 
 class GetPriceError(BaseError):
     pass
+
+
+class CityNotFoundError(BaseError):
+    pass

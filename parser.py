@@ -81,6 +81,9 @@ class Parser:
         for header in self.get_emails_headers():
             city = self.get_city_from_header(header)
             price = self.get_price_from_header(header)
-            if price <= self.max_prices[city]:
-                result.append((city, price))
+            try:
+                if price <= self.max_prices[city]:
+                    result.append((city, price))
+            except KeyError:
+                raise errors.CityNotFoundError
         return result
