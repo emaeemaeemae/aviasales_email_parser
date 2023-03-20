@@ -1,8 +1,8 @@
 FROM python:3.9-slim
 
-COPY . /yandex_afisha
+COPY . /aviasales_email_parser
 
-WORKDIR /yandex_afisha
+WORKDIR /aviasales_email_parser
 
 RUN pip install -r requirements.txt
 
