@@ -6,4 +6,4 @@ WORKDIR /aviasales_email_parser
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "scheduler.py"]
+CMD ["python", "app.py"]
