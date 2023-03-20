@@ -31,7 +31,10 @@ class Parser:
             return json.load(file)
 
     def get_emails_list(self) -> list[str]:
-        self.email.select(config.EMAIL_DIR)
+        try:
+            self.email.select(config.EMAIL_DIR)
+        except imaplib.IMAP4_SSL.abort:
+            raise errors.GetEmailListError
         from_email = f'(FROM "{config.AS_EMAIL}")'
         res, lst = self.email.search(None, '(UNSEEN)', from_email)
         if res != 'OK':
