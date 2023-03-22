@@ -82,8 +82,11 @@ class Parser:
     def get_nice_routes(self) -> list:
         result = []
         for header in self.get_emails_headers():
-            city = self.get_city_from_header(header)
-            price = self.get_price_from_header(header)
+            try:
+                city = self.get_city_from_header(header)
+                price = self.get_price_from_header(header)
+            except (errors.GetCityError, errors.GetPriceError):
+                continue
             try:
                 if price <= self.max_prices[city]:
                     result.append((city, price))
