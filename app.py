@@ -5,8 +5,10 @@ import config
 from parser import Parser  # noqa
 from notify import Notifier
 from errors import BaseError
+from logger import logger
 
 
+@logger.catch
 def job():
     n.send_notify(p.get_nice_routes())
 

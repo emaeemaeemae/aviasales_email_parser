@@ -9,6 +9,7 @@ import errors
 
 from email.header import decode_header
 from dotenv import load_dotenv
+from logger import logger
 
 load_dotenv()
 
@@ -81,7 +82,10 @@ class Parser:
 
     def get_nice_routes(self) -> list:
         result = []
-        for header in self.get_emails_headers():
+        headers = self.get_emails_headers()
+        logger.info(f'Get {len(headers)} new letters')
+        for header in headers:
+            logger.info(f'Get new letter Header: {header}')
             try:
                 city = self.get_city_from_header(header)
                 price = self.get_price_from_header(header)
@@ -92,4 +96,6 @@ class Parser:
                     result.append((city, price))
             except KeyError:
                 raise errors.CityNotFoundError
+        if result:
+            logger.info(f'Get new {len(result)} nice routes')
         return result
