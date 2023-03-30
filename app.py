@@ -1,5 +1,6 @@
 import schedule
 import time
+import errno
 import config
 
 from parser import Parser  # noqa
@@ -22,6 +23,8 @@ if __name__ == '__main__':
     while True:
         try:
             schedule.run_pending()
+        except errno.EPIPE:
+            p = Parser()
         except BaseError:
             pass
         time.sleep(1)
