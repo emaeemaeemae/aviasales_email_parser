@@ -1,3 +1,5 @@
+import imaplib
+
 import schedule
 import time
 import errno
@@ -23,7 +25,7 @@ if __name__ == '__main__':
     while True:
         try:
             schedule.run_pending()
-        except errno.EPIPE:
+        except (errno.EPIPE, imaplib.IMAP4.abort):
             p = Parser()
         except BaseError:
             pass

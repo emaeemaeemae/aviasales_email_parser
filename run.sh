@@ -1,4 +1,5 @@
 echo "Start update"
+rm -rf logs
 . ./set_tag.sh
 export LATEST_TAG
 export PREV_TAG
